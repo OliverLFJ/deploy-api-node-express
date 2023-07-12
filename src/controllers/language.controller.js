@@ -3,7 +3,7 @@ import { getConnection } from "./../database/database"
 const getLanguages = async (req, res) => {
     try {
         const connection = await getConnection();
-        const result = await connection.query("SELECT * FROM language");
+        const result = await connection.query("SELECT * FROM languages");
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -15,7 +15,7 @@ const getLanguage = async (req, res) => {
     try {
         const { id } = req.params
         const connection = await getConnection();
-        const result = await connection.query("SELECT * FROM language WHERE ID = ?", id);
+        const result = await connection.query("SELECT * FROM languages WHERE ID = ?", id);
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -27,7 +27,7 @@ const deleteLanguage = async (req, res) => {
     try {
         const { id } = req.params
         const connection = await getConnection();
-        const result = await connection.query("DELETE FROM language WHERE ID = ?", id);
+        const result = await connection.query("DELETE FROM languages WHERE ID = ?", id);
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -43,7 +43,7 @@ const addLanguage = async (req, res) => {
         } else {
             const objectLanguage = { name, programmers }
             const connection = await getConnection();
-            await connection.query("INSERT INTO language SET ?", objectLanguage);
+            await connection.query("INSERT INTO languages SET ?", objectLanguage);
             res.json({ message: "Languaged Added" });
         }
     } catch (error) {
@@ -62,7 +62,7 @@ const updateLanguage = async (req, res) => {
         } else {
             const objectLanguage = { id, name, programmers }
             const connection = await getConnection();
-            await connection.query("UPDATE language SET ? WHERE id = ?", [objectLanguage, id]);
+            await connection.query("UPDATE languages SET ? WHERE id = ?", [objectLanguage, id]);
             res.json({ message: "Languaged Updated" });
         }
     } catch (error) {
